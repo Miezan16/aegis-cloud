@@ -8,13 +8,13 @@ spec:
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 7.3.x # Versi stabil
+    targetRevision: 7.3.x
     helm:
       parameters:
         - name: service.type
           value: NodePort
         - name: service.nodePort
-          value: "30001" # Kita buka di port 30001
+          value: "30001"
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
@@ -22,4 +22,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    createNamespace: true # ArgoCD akan membuat namespace 'monitoring' otomatis
+    createNamespace: true
