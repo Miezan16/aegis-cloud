@@ -3,17 +3,32 @@ kind: Deployment
 metadata:
   name: web-app-aegis
 spec:
-  replicas: 3 # Menjalankan 3 aplikasi sekaligus
+  replicas: 3
   selector:
     matchLabels:
-      app: web
+      app: web-aegis
   template:
     metadata:
       labels:
-        app: web
+        app: web-aegis
     spec:
       containers:
         - name: nginx
           image: nginx:latest
           ports:
             - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-aegis-service
+spec:
+  type: NodePort
+  selector:
+    app: web-aegis
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30080
